@@ -1,0 +1,43 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>测试apicloud</title>
+<script src="jquery.min.js"></script>
+<script src="SHA1.js"></script>
+<script>
+var now = Date.now();
+var appkey =SHA1("你的appId" +"UZ" +"你的appKey" +"UZ" +now) + "." +now;
+$(document).ready(function(){
+  $("button").click(function(){
+    $.ajax({
+       "url": "https://d.apicloud.com/mcm/api/tb_user",
+       "cache": false,
+        "headers": {
+          "X-APICloud-AppId": "A********",
+          "X-APICloud-AppKey": appkey
+        },
+       "type": "GET"
+   }).success(function (data, status, header) {
+      //success body
+      $("#div1").text(JSON.stringify(data));
+      // alert(JSON.stringify(data));
+
+       $("#div2").text(appkey);
+   }).fail(function (header, status, errorThrown) {
+     //fail body
+})
+                
+        });
+});
+</script>
+</head>
+<body>
+
+
+<div id="div1"><h2></h2></div>
+<button>获取云端数据</button>
+<div id="div2"><h2></h2></div>
+
+</body>
+</html>
